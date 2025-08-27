@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 1422028158}
   - component: {fileID: 1422028159}
   - component: {fileID: 1422028157}
+  - component: {fileID: 1422028161}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -425,6 +426,7 @@ MonoBehaviour:
   Acceleration_Rate: 10
   Deceleration_Rate: 15
   Show_Debug_Gizmos: 1
+  Player_Animator_Manager: {fileID: 1422028161}
 --- !u!50 &1422028158
 Rigidbody2D:
   serializedVersion: 5
@@ -517,8 +519,21 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.7, y: 1.2}
+  m_Size: {x: 0.5, y: 0.7}
   m_Direction: 0
+--- !u!114 &1422028161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422028155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3cf747df811f947a2ce31b5cafea36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player_Animator: {fileID: 1719943470}
 --- !u!1 &1719943467
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719943468}
   - component: {fileID: 1719943469}
+  - component: {fileID: 1719943470}
   m_Layer: 0
   m_Name: Player_Sprite
   m_TagString: Untagged
@@ -606,6 +622,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1719943470
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719943467}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ef59530845999c4ca34f710c3feabbd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

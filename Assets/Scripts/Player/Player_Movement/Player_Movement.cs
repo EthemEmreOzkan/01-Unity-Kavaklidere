@@ -15,6 +15,8 @@ public class Player_Movement : MonoBehaviour
 
     [Header("Debug ---------------------------------------------------------------------------")]
     [SerializeField] private bool Show_Debug_Gizmos = false;
+    [Header("Animations----------------------------------------------------------------------")]
+    [SerializeField] private Player_Animator_Manager Player_Animator_Manager;
 
     private Rigidbody2D rb;
     private Vector2 movement_Input, current_Velocity, target_Velocity;
@@ -47,6 +49,9 @@ public class Player_Movement : MonoBehaviour
         // Karakter yönünü çevirme
         if (current_Velocity.x != 0)
             transform.localScale = new Vector3(Mathf.Sign(current_Velocity.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+        // TODO Animator çağrısı detaylıca bak
+        Player_Animator_Manager.SetBool("Is_Walking", Is_Moving);
     }
 
     void OnEnable()
