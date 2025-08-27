@@ -56,7 +56,8 @@ public class Enemy_Movement_AI : MonoBehaviour
         Calculate_Movement();
         Apply_Movement();
         Handle_Rotation();
-        
+
+        // TODO Animator çağrısı eklenecek
         // ! Animator çağrısı buraya eklenecek
         // Player_Animator_Manager.SetBool("Is_Walking", Is_Moving);
     }
