@@ -9,15 +9,17 @@ public class Player_Movement : MonoBehaviour
     #region Inspector Tab ----------------------------------------------------------------------
 
     [Header("Hareket Ayarlari ----------------------------------------------------------------")]
+    [Space]
     [SerializeField] private float Move_Speed = 5f;
     [SerializeField] private float Acceleration_Rate = 10f;
     [SerializeField] private float Deceleration_Rate = 15f;
-
+    [Space]
     [Header("Debug ---------------------------------------------------------------------------")]
+    [Space]
     [SerializeField] private bool Show_Debug_Gizmos = false;
     [Header("Animations----------------------------------------------------------------------")]
     [SerializeField] private Player_Animator_Manager Player_Animator_Manager;
-
+    [Space]
     private Rigidbody2D rb;
     private Vector2 movement_Input, current_Velocity, target_Velocity;
     private InputAction move_Action;

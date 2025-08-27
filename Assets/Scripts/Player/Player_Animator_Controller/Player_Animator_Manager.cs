@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player_Animator_Manager : MonoBehaviour
 {
+    [Header("Animator References --------------------------------------------------------------")]
+    [Space]
     [SerializeField] private Animator Player_Animator;
 
     //*-----------------------------------------------------------------------------------------//
