@@ -88,6 +88,8 @@ public class Player_Movement : MonoBehaviour
 
     #region Public Methods ----------------------------------------------------------------------
 
+    // TODO Gerekli yerlerde çağırılacak
+
     public void Set_Movement_Speed(float new_Speed)
         => Move_Speed = Mathf.Max(0f, new_Speed);
 
