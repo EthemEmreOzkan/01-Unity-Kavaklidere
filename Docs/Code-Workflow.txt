@@ -1,0 +1,52 @@
+=========================================
+   01-Unity-Kavaklidere - Code Workflow
+=========================================
+
+Kod Yazım Kuralları:
+--------------------
+- Class İsimleri      : PascalCase (örn: Player_Movement)
+- Public Method/Prop  : PascalCase (örn: Set_Movement_Speed, Is_Moving)
+- Private Değişkenler : Degisken_X (örn: Hareket_Hizi, Rb_Component)
+- Local Değişkenler   : Degisken_X (örn: Hedef_Velocity, Girdi_Vector)
+- Inspector Alanları  : [SerializeField] ile tanımlanır
+- #region Kullanımı   : Kod blokları Inspector / Lifecycle / Input / Public / Debug olarak ayrılır
+- Yorumlar            : Yalnızca anlamlı ve net olmalı, TODO’lar kısa yazılmalı
+
+Workflow:
+---------
+1. Yeni Sistem Başlatma:
+   - Her sistem ayrı bir class/script’te yazılır
+   - Dosya ismi class ismiyle aynı olmalı (örn: Player_Movement.cs)
+   - Inspector değişkenleri Header/Space ile gruplandırılmalı
+
+2. Kod Yazım Düzeni:
+   - Unity lifecycle method’ları sabit sırada: Awake → Start → Update/FixedUpdate → OnEnable/OnDisable
+   - Private alanlar: Degisken_X formatında (örn: Hareket_Hizi, Girdi_Input)
+   - Public property/metotlar: PascalCase (örn: Stop_Movement, Set_Movement_Speed)
+   - Method isimleri fiil ile başlamalı (örn: Apply_Force, Reset_Position)
+
+3. Commit Workflow (Kod için):
+   - Commit mesajları kısa ve açıklayıcı olmalı
+   - Örnek:
+     feat(player): add acceleration system
+     fix(player): resolve movement input normalization
+     refactor(player): clean up FixedUpdate method
+   - Tek commit = tek mantıksal değişiklik
+
+4. Kod Test Süreci:
+   - Her yeni özellik Play Mode’da test edilmeli
+   - Hareket, animasyon ve input sistemleri kontrol edilmeli
+   - Kritik hesaplamalar (örn: velocity hesapları) için Unit Test yazılması önerilir
+
+5. Refactor ve Review:
+   - Dev’e merge edilmeden önce kod okunabilirliği kontrol edilmeli
+   - Gereksiz tekrarlar temizlenmeli
+   - Debug kodları (örn: Gizmos) opsiyonel olarak kapatılabilir hale getirilmeli
+   - Public API sade tutulmalı, yalnızca dışarıdan gerekli method/property erişilebilir olmalı
+
+Öneriler:
+----------
+- Inspector değişkenlerini düzenli tut, mümkünse gruplandır
+- Gereksiz yorum satırlarını kaldır, sadece önemli yerlerde bırak
+- Kod düzeni ve case standardına her zaman sadık kal
+- Her yeni feature eklemeden önce branch aç, test et ve öyle merge et
