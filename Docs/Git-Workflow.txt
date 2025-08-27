@@ -1,0 +1,62 @@
+=========================================
+   01-Unity-Kavaklidere - Git Workflow  
+=========================================
+
+Branch Yapısı:
+---------------
+main        : Stabil, release ve CV’de gösterilecek final kod
+dev         : Güncel geliştirmeler ve feature/fix branch’leri burada toplanır
+feat/...    : Kısa ömürlü, tek bir özelliğe odaklanan branch’ler. İş bitince silinebilir
+fix/...     : Dev branch’inde ortaya çıkan bug’ların düzeltilmesi için açılır
+docs        : Proje ile ilgili teknik notlar, workflow ve küçük açıklamalar için
+
+Örnek Feature Branch’ler:
+-------------------------
+feat/player_properties
+feat/enemy_system
+feat/word_spawner
+
+Workflow:
+----------
+1. Yeni feature başlatma:
+   - Dev branch’inin son halinden checkout alınır.
+   - Açıklayıcı bir feature branch açılır: feat/<feature-ismi>
+   - Feature branch üzerinde yalnızca ilgili sistemi ekle, diğer branch’leri etkileme
+
+2. Commit mesaj sistemi:
+   - Commit mesajları açık ve açıklayıcı olmalı
+   - Örnek: feat/player_properties: add player stat system
+   - Commit’ler küçük ve anlamlı olsun, tek bir değişikliği anlatmalı
+
+3. Feature tamamlandığında:
+   - Feature branch dev’e merge edilir
+   - Merge sırasında çatışmalar çözülür
+   - Sistem diğer component’lerle test edilir
+   - Gerekiyorsa fix/... branch’i açılarak bug’lar düzeltilir ve dev’e tekrar merge edilir
+
+4. Dev branch stabil olduğunda main’e merge:
+   - Dev branch’i stabil ve test edilmiş ise main’e merge edilir
+   - Main her zaman deploy edilebilir olmalı
+   - Merge sonrası main branch’de herhangi bir feature veya fix branch’i kalmamalı
+
+5. Docs branch’i kullanımı:
+   - Teknik notlar, workflow ve açıklamalar burada tutulur
+   - Docs branch’i sık sık güncellenir
+   - Gerektiğinde main ve dev branch’lerine merge edilir
+   - Docs, CV ve proje raporları için referans olarak kullanılabilir
+
+Push ve Pull Kuralları:
+------------------------
+- Main branch her zaman stabil kalmalı, değişiklikler kontrollü ve test edilmiş olmalı
+- Dev branch’e merge edilmeden önce lokal olarak güncel olmalı ve gerekirse pull yapılmalı
+- Feature/fix branch’leri iş bitince dev’e merge edilir, push edilmesi opsiyonel ama backup için önerilir
+- Docs branch’i düzenli push edilmeli, workflow ve notlar güncel tutulmalı
+
+Öneriler:
+-----------
+- Feature ve fix branch’leri kısa ömürlü olsun, iş bitince silinsin
+- Commit mesajları açık, anlamlı ve tek bir değişikliği anlatacak şekilde olsun
+- Dev branch’i sürekli güncel ve test edilmiş kodları içersin
+- Main branch’i CV’de göstereceğin final ürün olarak stabil tut
+- Workflow ve branch kurallarına sadık kal, proje büyüdükçe düzen kaybolmasın
+- Docs branch’i projeye ait tüm teknik detayları, workflow ve notları içermeli
