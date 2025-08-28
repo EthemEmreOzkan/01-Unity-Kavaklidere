@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3197883193576091722}
   - component: {fileID: 3174995955875504943}
   - component: {fileID: 2650497490462214303}
+  - component: {fileID: 3416687019199947657}
   m_Layer: 0
   m_Name: Enemy_Test
   m_TagString: Enemy
@@ -116,8 +117,22 @@ MonoBehaviour:
   Deceleration_Rate: 12
   Detection_Range: 10
   Stop_Distance: 1
-  Player_Target: {fileID: 0}
+  Player_Target: {fileID: 8501768227870957481, guid: 361125675dd14b54ab6c63249965caac, type: 3}
+  Enemy_Animator_Manager: {fileID: 3416687019199947657}
   Show_Debug_Gizmos: 1
+--- !u!114 &3416687019199947657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922013173881512084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3c64947d82394459e8c2971ae73a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy_Animator: {fileID: 170083825471300127}
 --- !u!1 &7430266378572027824
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1644992418714556886}
   - component: {fileID: 3240459112402015132}
+  - component: {fileID: 170083825471300127}
   m_Layer: 0
   m_Name: Enemy_Test_Sprite
   m_TagString: Untagged
@@ -205,3 +221,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &170083825471300127
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7430266378572027824}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb9c9e9902cf1474bb3c65bc85ef95db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

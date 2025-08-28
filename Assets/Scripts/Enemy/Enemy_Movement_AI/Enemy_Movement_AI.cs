@@ -14,9 +14,14 @@ public class Enemy_Movement_AI : MonoBehaviour
     [Space]
     [Header("AI Ayarlari ---------------------------------------------------------------------")]
     [Space]
+    // TODO Object Pool eklendiği zaman için Detetion_Range güncelle
     [SerializeField] private float Detection_Range = 10f;
     [SerializeField] private float Stop_Distance = 1.5f;
     [SerializeField] private Transform Player_Target;
+    [Space]
+    [Header("Animations----------------------------------------------------------------------")]
+    [Space]
+    [SerializeField] private Enemy_Animator_Manager Enemy_Animator_Manager;
     [Space]
     [Header("Debug ---------------------------------------------------------------------------")]
     [Space]
@@ -58,8 +63,7 @@ public class Enemy_Movement_AI : MonoBehaviour
         Handle_Rotation();
 
         // TODO Animator çağrısı eklenecek
-        // ! Animator çağrısı buraya eklenecek
-        // Player_Animator_Manager.SetBool("Is_Walking", Is_Moving);
+        Enemy_Animator_Manager.SetBool("Is_Walking", Is_Moving);
     }
 
     #endregion
