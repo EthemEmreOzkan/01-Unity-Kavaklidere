@@ -12,25 +12,19 @@ public class Enemy_Movement_AI : MonoBehaviour
     [SerializeField] private float Acceleration_Rate = 8f;
     [SerializeField] private float Deceleration_Rate = 12f;
     [Space]
-    [Header("AI Ayarlari ---------------------------------------------------------------------")]
+    [Header("Component References ------------------------------------------------------------")]
     [Space]
-    // TODO Object Pool eklendiği zaman için Detetion_Range güncelle
-    [SerializeField] private float Detection_Range = 10f;
-    [SerializeField] private float Stop_Distance = 1.5f;
-    [SerializeField] private Transform Player_Target;
-    [Space]
-    [Header("Animations----------------------------------------------------------------------")]
-    [Space]
+    [SerializeField] private Enemy_Distance_Calculator Enemy_Distance_Calculator;
     [SerializeField] private Enemy_Animator_Manager Enemy_Animator_Manager;
     [Space]
     [Header("Debug ---------------------------------------------------------------------------")]
     [Space]
     [SerializeField] private bool Show_Debug_Gizmos = true;
+    [SerializeField] private bool Show_Velocity_Info = false;
     [Space]
     
     private Rigidbody2D rb;
     private Vector2 movement_Direction, current_Velocity, target_Velocity;
-    private float distance_To_Player;
 
     public Vector2 Current_Velocity => current_Velocity;
     public bool Is_Moving => current_Velocity.magnitude > 0.1f;
@@ -39,20 +33,11 @@ public class Enemy_Movement_AI : MonoBehaviour
 
     //*-----------------------------------------------------------------------------------------//
 
-    #region Unity Lifecycle ---------------------------------------------------------------------
+    #region Unity Lifecycle -------------------------------------------------------------------
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
-        rb.freezeRotation = true;
-
-        if (Player_Target == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-                Player_Target = player.transform;
-        }
+        Initialize_Components();
     }
 
     void FixedUpdate()
@@ -61,9 +46,29 @@ public class Enemy_Movement_AI : MonoBehaviour
         Calculate_Movement();
         Apply_Movement();
         Handle_Rotation();
+        Update_Animations();
+    }
 
-        // TODO Animator çağrısı eklenecek
-        Enemy_Animator_Manager.SetBool("Is_Walking", Is_Moving);
+    #endregion
+
+    //*-----------------------------------------------------------------------------------------//
+
+    #region Initialization --------------------------------------------------------------------
+
+    private void Initialize_Components()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+        rb.freezeRotation = true;
+
+        // Distance Calculator'ı otomatik bul
+        if (Enemy_Distance_Calculator == null)
+            Enemy_Distance_Calculator = GetComponent<Enemy_Distance_Calculator>();
+
+        if (Enemy_Distance_Calculator == null)
+        {
+            Debug.LogError($"Enemy_Distance_Calculator component bulunamadı! {gameObject.name}");
+        }
     }
 
     #endregion
@@ -74,13 +79,17 @@ public class Enemy_Movement_AI : MonoBehaviour
 
     private void Update_AI_Logic()
     {
-        if (Player_Target == null) return;
-
-        distance_To_Player = Vector2.Distance(transform.position, Player_Target.position);
-
-        if (distance_To_Player <= Detection_Range && distance_To_Player > Stop_Distance)
+        if (Enemy_Distance_Calculator == null || !Enemy_Distance_Calculator.Has_Valid_Target)
         {
-            movement_Direction = ((Vector2)Player_Target.position - (Vector2)transform.position).normalized;
+            movement_Direction = Vector2.zero;
+            return;
+        }
+
+        // Distance Calculator'dan bilgileri al
+        if (Enemy_Distance_Calculator.Is_Target_In_Detection_Range && 
+            Enemy_Distance_Calculator.Is_Target_Beyond_Stop_Range)
+        {
+            movement_Direction = Enemy_Distance_Calculator.Direction_To_Target;
         }
         else
         {
@@ -106,24 +115,46 @@ public class Enemy_Movement_AI : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Sign(current_Velocity.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
+    private void Update_Animations()
+    {
+        if (Enemy_Animator_Manager != null)
+            Enemy_Animator_Manager.SetBool("Is_Walking", Is_Moving);
+    }
+
     #endregion
 
     //*-----------------------------------------------------------------------------------------//
 
-    #region Public Methods ----------------------------------------------------------------------
-
-    // TODO Gerekli yerlerde çağırılacak
+    #region Public Methods ---------------------------------------------------------------------
 
     public void Set_Movement_Speed(float new_Speed)
         => Move_Speed = Mathf.Max(0f, new_Speed);
 
-    public void Set_Player_Target(Transform new_Target)
-        => Player_Target = new_Target;
+    public void Set_Distance_Calculator(Enemy_Distance_Calculator new_Calculator)
+        => Enemy_Distance_Calculator = new_Calculator;
 
     public void Stop_Movement()
     {
         current_Velocity = Vector2.zero;
         rb.linearVelocity = Vector2.zero;
+    }
+
+    // Distance Calculator'dan bilgi almak için proxy metodlar
+    public float Get_Current_Distance()
+        => Enemy_Distance_Calculator != null ? Enemy_Distance_Calculator.Current_Distance : float.MaxValue;
+
+    public bool Is_Target_In_Range(float range)
+        => Enemy_Distance_Calculator != null ? Enemy_Distance_Calculator.Is_Target_Within_Range(range) : false;
+
+    public Vector2 Get_Direction_To_Target()
+        => Enemy_Distance_Calculator != null ? Enemy_Distance_Calculator.Direction_To_Target : Vector2.zero;
+
+    // Object Pooling support
+    public void Reset_Movement()
+    {
+        Stop_Movement();
+        movement_Direction = Vector2.zero;
+        target_Velocity = Vector2.zero;
     }
 
     #endregion
@@ -136,26 +167,24 @@ public class Enemy_Movement_AI : MonoBehaviour
     {
         if (!Show_Debug_Gizmos) return;
 
-        // Detection range
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, Detection_Range);
-
-        // Stop distance
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, Stop_Distance);
-
         if (Application.isPlaying)
         {
             // Mevcut hız vektörü
-            Gizmos.color = Color.green;
-            Gizmos.DrawRay(transform.position, current_Velocity.normalized * 2f);
-
-            // Oyuncuya olan çizgi
-            if (Player_Target != null)
+            if (current_Velocity.magnitude > 0.1f)
             {
-                Gizmos.color = distance_To_Player <= Detection_Range ? Color.red : Color.white;
-                Gizmos.DrawLine(transform.position, Player_Target.position);
+                Gizmos.color = Color.green;
+                Gizmos.DrawRay(transform.position, current_Velocity.normalized * 2f);
             }
+        }
+
+        // Velocity info display
+        if (Show_Velocity_Info && Application.isPlaying)
+        {
+            Vector3 label_Pos = transform.position + Vector3.up * 3f;
+            UnityEditor.Handles.Label(label_Pos, 
+                $"Speed: {current_Velocity.magnitude:F2}\n" +
+                $"Is Moving: {Is_Moving}\n" +
+                $"Direction: {movement_Direction}");
         }
     }
 

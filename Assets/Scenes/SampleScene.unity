@@ -386,10 +386,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 735335766581343016, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Primary_Target
+      value: 
+      objectReference: {fileID: 159271363}
+    - target: {fileID: 735335766581343016, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Auto_Find_Player
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2650497490462214303, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
       propertyPath: Player_Target
       value: 
       objectReference: {fileID: 159271363}
+    - target: {fileID: 2650497490462214303, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Show_Velocity_Info
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3902950730360937570, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.8

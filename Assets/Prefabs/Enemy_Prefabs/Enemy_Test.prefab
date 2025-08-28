@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3902950730360937570}
   - component: {fileID: 3197883193576091722}
   - component: {fileID: 3174995955875504943}
-  - component: {fileID: 2650497490462214303}
   - component: {fileID: 3416687019199947657}
+  - component: {fileID: 2650497490462214303}
+  - component: {fileID: 735335766581343016}
   m_Layer: 0
   m_Name: Enemy_Test
   m_TagString: Enemy
@@ -100,6 +101,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 0.7}
   m_Direction: 0
+--- !u!114 &3416687019199947657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922013173881512084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3c64947d82394459e8c2971ae73a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy_Animator: {fileID: 170083825471300127}
 --- !u!114 &2650497490462214303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,12 +129,10 @@ MonoBehaviour:
   Move_Speed: 1.5
   Acceleration_Rate: 8
   Deceleration_Rate: 12
-  Detection_Range: 10
-  Stop_Distance: 1
-  Player_Target: {fileID: 8501768227870957481, guid: 361125675dd14b54ab6c63249965caac, type: 3}
+  Enemy_Distance_Calculator: {fileID: 735335766581343016}
   Enemy_Animator_Manager: {fileID: 3416687019199947657}
   Show_Debug_Gizmos: 1
---- !u!114 &3416687019199947657
+--- !u!114 &735335766581343016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,10 +141,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6922013173881512084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb3c64947d82394459e8c2971ae73a10, type: 3}
+  m_Script: {fileID: 11500000, guid: b353685616028d142bda128d52941ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy_Animator: {fileID: 170083825471300127}
+  Detection_Range: 10
+  Stop_Distance: 1.5
+  Attack_Range: 2
+  Primary_Target: {fileID: 8501768227870957481, guid: 361125675dd14b54ab6c63249965caac, type: 3}
+  Auto_Find_Player: 1
+  Show_Debug_Gizmos: 1
+  Show_Distance_Info: 1
 --- !u!1 &7430266378572027824
 GameObject:
   m_ObjectHideFlags: 0
