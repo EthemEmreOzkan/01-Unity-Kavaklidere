@@ -373,6 +373,17 @@ Transform:
   - {fileID: 619394802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1549865195 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2650497490462214303, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+  m_PrefabInstance: {fileID: 2379623236084590418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541c860b0f284734bb292c98c32a96f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2379623236084590418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -383,11 +394,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 735335766581343016, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
       propertyPath: Attack_Range
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 735335766581343016, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
       propertyPath: Stop_Distance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3119834475962835999, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Dash_Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3119834475962835999, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Dash_Distance
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3119834475962835999, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
       propertyPath: Attack_Cooldown
@@ -395,7 +414,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3119834475962835999, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
       propertyPath: Show_Debug_Logs
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3119834475962835999, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Enemy_Movement_AI
+      value: 
+      objectReference: {fileID: 1549865195}
+    - target: {fileID: 3119834475962835999, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Current_Attack_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3119834475962835999, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
+      propertyPath: Ranged_Hit_Layers.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3902950730360937570, guid: 51c59f27397020e48b3715a0adf94c32, type: 3}
       propertyPath: m_LocalPosition.x
@@ -459,8 +490,20 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6687815590809449711, guid: 361125675dd14b54ab6c63249965caac, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687815590809449711, guid: 361125675dd14b54ab6c63249965caac, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924121548806977251, guid: 361125675dd14b54ab6c63249965caac, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924121548806977251, guid: 361125675dd14b54ab6c63249965caac, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8501768227870957481, guid: 361125675dd14b54ab6c63249965caac, type: 3}
       propertyPath: m_LocalPosition.x
