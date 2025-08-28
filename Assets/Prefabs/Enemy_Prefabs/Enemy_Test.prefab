@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3416687019199947657}
   - component: {fileID: 2650497490462214303}
   - component: {fileID: 735335766581343016}
+  - component: {fileID: 3119834475962835999}
   m_Layer: 0
   m_Name: Enemy_Test
   m_TagString: Enemy
@@ -132,6 +133,7 @@ MonoBehaviour:
   Enemy_Distance_Calculator: {fileID: 735335766581343016}
   Enemy_Animator_Manager: {fileID: 3416687019199947657}
   Show_Debug_Gizmos: 1
+  Show_Velocity_Info: 1
 --- !u!114 &735335766581343016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,10 +149,27 @@ MonoBehaviour:
   Detection_Range: 10
   Stop_Distance: 1.5
   Attack_Range: 2
-  Primary_Target: {fileID: 8501768227870957481, guid: 361125675dd14b54ab6c63249965caac, type: 3}
+  Player_Transform: {fileID: 0}
   Auto_Find_Player: 1
   Show_Debug_Gizmos: 1
   Show_Distance_Info: 1
+--- !u!114 &3119834475962835999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922013173881512084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fafe7244f07261449a9812dc5d02385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack_Cooldown: 1.5
+  Attack_Damage: 10
+  Enemy_Distance_Calculator: {fileID: 735335766581343016}
+  Enemy_Animator_Manager: {fileID: 3416687019199947657}
+  Show_Debug_Logs: 1
 --- !u!1 &7430266378572027824
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +181,7 @@ GameObject:
   - component: {fileID: 1644992418714556886}
   - component: {fileID: 3240459112402015132}
   - component: {fileID: 170083825471300127}
+  - component: {fileID: 332674165131282124}
   m_Layer: 0
   m_Name: Enemy_Test_Sprite
   m_TagString: Untagged
@@ -261,3 +281,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &332674165131282124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7430266378572027824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35f4db4b48f3d114fa0dc0751c191f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy_Attack_System: {fileID: 3119834475962835999}
